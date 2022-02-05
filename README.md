@@ -90,14 +90,14 @@ $payment_id = 'Optional_payment_id';
 $pm = new PerfectMoney;
 
 // Send Funds with all fields
-$sendMoney = $pm->sendMoney($sendTo, $amount, $description, $payment_id);
+$sendMoney = $pm->transfer($sendTo, $amount, $description, $payment_id);
 if($sendMoney['status'] == 'success')
 {
 	// Some code here
 }
 
 // Send Funds with required fields
-$sendMoney = $pm->sendMoney($sendTo, $amount);
+$sendMoney = $pm->transfer($sendTo, $amount);
 if($sendMoney['status'] == 'error')
 {
 	// Payment Failed
