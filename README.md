@@ -71,7 +71,7 @@ $wallets = $pm->wallets();
 
 if($wallets['status'] == 'success')
 {
-	foreach($wallets['wallets'] as $wallet){
+    foreach($wallets['wallets'] as $wallet){
         echo $wallet['account'].': '.$wallet['balance']; // U1935xxx: 10.00
     }
 }
