@@ -4,6 +4,7 @@ namespace tuyenlaptrinh\PerfectMoney;
 
 use Carbon\Carbon;
 use GuzzleHttp\Client;
+use Illuminate\Http\Request;
 
 /**
  * Class PerfectMoney
@@ -34,10 +35,11 @@ class PerfectMoney{
      * @var string
      */
     protected $client;
+    protected $request;
 
     public function __construct()
     {
-
+        $this->request = new Request();
         $this->account_id = config('perfectmoney.account_id');
         $this->passphrase = config('perfectmoney.passphrase');
         $this->alt_passphrase = config('perfectmoney.alternate_passphrase');
@@ -106,7 +108,7 @@ class PerfectMoney{
      *
      * @return array
      */
-    public function sendMoney($account, $amount, $descripion = '', $payment_id = '')
+    public function transfer($account, $amount, $descripion = '', $payment_id = '')
     {
 
         // trying to open URL to process PerfectMoney Spend request
@@ -281,21 +283,21 @@ class PerfectMoney{
 
     public function hash()
     {
-        $string = \request()->input('PAYMENT_ID') . ':';
-        $string .= \request()->input('PAYEE_ACCOUNT') . ':';
-        $string .= \request()->input('PAYMENT_AMOUNT') . ':';
-        $string .= \request()->input('PAYMENT_UNITS') . ':';
-        $string .= \request()->input('PAYMENT_BATCH_NUM') . ':';
-        $string .= \request()->input('PAYER_ACCOUNT') . ':';
+        $string = $this->request->input('PAYMENT_ID') . ':';
+        $string .= $this->request->input('PAYEE_ACCOUNT') . ':';
+        $string .= $this->request->input('PAYMENT_AMOUNT') . ':';
+        $string .= $this->request->input('PAYMENT_UNITS') . ':';
+        $string .= $this->request->input('PAYMENT_BATCH_NUM') . ':';
+        $string .= $this->request->input('PAYER_ACCOUNT') . ':';
         $string .= strtoupper(md5($this->alt_passphrase)) . ':';
-        $string .= \request()->input('TIMESTAMPGMT');
+        $string .= $this->request->input('TIMESTAMPGMT');
         return strtoupper(md5($string));
     }
 
     public function verified()
     {
         $hash = $this->hash();
-        if($hash == \request()->input('V2_HASH')){
+        if($hash == $this->request->input('V2_HASH')){
             return true;
         }
         else return false;
