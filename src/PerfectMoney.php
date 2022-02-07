@@ -37,13 +37,13 @@ class PerfectMoney{
     protected $client;
     protected $request;
 
-    public function __construct()
+    public function __construct($account_id = false, $passphrase = false, $alternate_passphrase = false, $merchant_id = false)
     {
         $this->request = new Request();
-        $this->account_id = config('perfectmoney.account_id');
-        $this->passphrase = config('perfectmoney.passphrase');
-        $this->alt_passphrase = config('perfectmoney.alternate_passphrase');
-        $this->merchant_id = config('perfectmoney.merchant_id');
+        $this->account_id = $account_id ? $account_id : config('perfectmoney.account_id');
+        $this->passphrase = $passphrase ? $passphrase : config('perfectmoney.passphrase');
+        $this->alt_passphrase = $alternate_passphrase ? $alternate_passphrase : config('perfectmoney.alternate_passphrase');
+        $this->merchant_id = $merchant_id ? $merchant_id : config('perfectmoney.merchant_id');
         $this->client = new Client(['verify' => false]);
 
     }
