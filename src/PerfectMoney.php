@@ -154,8 +154,8 @@ class PerfectMoney{
     {
 
         $view_data = [
-            'PAYEE_ACCOUNT'			=> ($data['PAYEE_ACCOUNT'] ?? config('perfectmoney.marchant_id')),
-            'PAYEE_NAME'			=> ($data['PAYEE_NAME'] ?? config('perfectmoney.marchant_name')),
+            'PAYEE_ACCOUNT'			=> ($data['PAYEE_ACCOUNT'] ?? config('perfectmoney.merchant_id')),
+            'PAYEE_NAME'			=> ($data['PAYEE_NAME'] ?? config('perfectmoney.merchant_name')),
             'PAYMENT_AMOUNT'		=> ($data['PAYMENT_AMOUNT'] ?? ''),
             'PAYMENT_UNITS'			=> ($data['PAYMENT_UNITS'] ?? config('perfectmoney.units')),
             'PAYMENT_ID'			=> ($data['PAYMENT_ID'] ?? null),
