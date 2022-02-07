@@ -134,7 +134,10 @@ class PerfectMoney{
             {
                 if($item[1] != 'ERROR')
                 {
-                    $data['data'][$item[1]] = $item[2];
+                    $data['message'][$item[1]] = $item[2];
+                }
+                else{
+                    $data['error'] = $item[2];
                 }
             }
             $data['status'] = 'success';
